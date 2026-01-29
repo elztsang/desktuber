@@ -83,7 +83,7 @@ class tuber():
 
         # move right by one pixel
         # self.x += 1
-        print("update called")
+        # print("update called")
 
         # advance frame if 50ms have passed
         if time.time() > self.timestamp + newTime:
@@ -97,7 +97,7 @@ class tuber():
                 self.img = self.talk_blink
             else:
                 self.img = self.blink
-        if time.time() > self.timestamp + newTime + 0.2:
+        if time.time() > self.timestamp + newTime + 0.2: # might need to do some arithmetic/threshold stuff here to make the blink more "stable"
             print("blink2 ", time.time())
             self.timestamp = time.time()
             # advance the frame by one, wrap back to 0 at the end
