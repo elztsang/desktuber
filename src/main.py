@@ -14,6 +14,8 @@ class tuber():
         # bind events to keypresses
         self.window.bind('<KeyPress>', self.on_press)
         self.window.bind('<KeyRelease>', self.on_release)
+        self.window.bind("<ButtonPress-1>", self.start_move)
+        self.window.bind('<B1-Motion>', self.move_window)
         # placeholder image
         # I could replace the gif blink mechanism with just switching between two images.
 
@@ -109,7 +111,7 @@ class tuber():
         # self.img = self.blink[0]
 
         # create the window
-        self.window.geometry('128x128+0+0')
+        self.window.geometry('128x128')
         # add the image to our label
         self.label.configure(image=self.img)
         # give window to geometry manager (so it will appear)
@@ -118,6 +120,8 @@ class tuber():
         # call update again after 10ms
         self.window.after(100, self.update) #original value was 10
 
+
+    # keyboard events
     def on_press(self, event):
         # if key.char.isalpha() or key.char.isdigit():
         #     print("KEY PRESSED!!")
@@ -128,10 +132,21 @@ class tuber():
         self.isTalking = False
         self.img = self.idle
 
-    # with Listener(
-    #     on_pres=on_press,
-    #     on_release=on_release) as listener:
-    #     print("listener initialized")
-    #     listener.join()
+
+    # window movement events
+    def start_move(self, event):
+        global lastx, lasty
+        lastx = event.x_root
+        lasty = event.y_root
+
+    def move_window(self, event):
+        global lastx, lasty
+        deltax = event.x_root - lastx
+        deltay = event.y_root - lasty
+        x = self.window.winfo_x() + deltax
+        y = self.window.winfo_y() + deltay
+        self.window.geometry("+%s+%s" % (x, y))
+        lastx = event.x_root
+        lasty = event.y_root
 
 tuber()
