@@ -7,6 +7,7 @@ Implementation plans:
 - ~~make window draggable~~
 - make window resizeable
 - listen to keyboard events when window is not in focus
+- implement UI on window hover
 
 credits:
 - moving window: https://stackoverflow.com/a/74075517 
