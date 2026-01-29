@@ -23,15 +23,20 @@ class tuber():
         idle = Image.open('assets/idle.png')
         talk = Image.open('assets/talk.png')
         blink = Image.open('assets/blink.png')
+        talk_blink = Image.open('assets/talk_blink.png')
 
         resized_idle = idle.resize((128,128))
         resized_talk = talk.resize((128,128))
         resized_blink = blink.resize((128,128))
+        resized_talk_blink = talk_blink.resize((128,128))
 
 
         self.idle = ImageTk.PhotoImage(resized_idle)
         self.talk = ImageTk.PhotoImage(resized_talk)
         self.blink = ImageTk.PhotoImage(resized_blink)
+        self.talk_blink = ImageTk.PhotoImage(resized_talk_blink)
+
+        self.isTalking = False
 
         self.img = self.idle
 
@@ -85,14 +90,21 @@ class tuber():
             # advance the frame by one, wrap back to 0 at the end
             # self.frame_index = (self.frame_index + 1) % len(self.blink)
             # self.img = self.blink[self.frame_index]
-            self.img = self.blink
-        if time.time() > self.timestamp + newTime + 0.15:
+            if(self.isTalking == True):
+                print("============= talk blink =============")
+                self.img = self.talk_blink
+            else:
+                self.img = self.blink
+        if time.time() > self.timestamp + newTime + 0.2:
             print("blink2 ", time.time())
             self.timestamp = time.time()
             # advance the frame by one, wrap back to 0 at the end
             # self.frame_index = (self.frame_index + 1) % len(self.blink)
             # self.img = self.blink[self.frame_index]
-            self.img = self.idle
+            if(self.isTalking == True):
+                self.img = self.talk
+            else:
+                self.img = self.idle
 
         # self.img = self.blink[0]
 
@@ -109,9 +121,11 @@ class tuber():
     def on_press(self, event):
         # if key.char.isalpha() or key.char.isdigit():
         #     print("KEY PRESSED!!")
+        self.isTalking = True
         self.img = self.talk
 
     def on_release(self, event):
+        self.isTalking = False
         self.img = self.idle
 
     # with Listener(
