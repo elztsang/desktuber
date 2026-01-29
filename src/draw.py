@@ -1,7 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 import time
-import random # I can use this to make it randomly blink.
+import random # I can use this to make it randomly blink
 from pynput import keyboard
 
 

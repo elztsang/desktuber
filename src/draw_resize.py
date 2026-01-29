@@ -54,7 +54,7 @@ class tuber():
         self.label = tk.Label(self.window, bd=0, bg='green')
 
         # create a window of size 128x128 pixels, at coordinates 0,0
-        self.window.geometry('128x128+1800+1650')
+        self.window.geometry('128x128+0+0')
         # self.img = ImageTk.PhotoImage(self.img.resize(128, 128))
 
         # add the image to our label
@@ -97,7 +97,7 @@ class tuber():
         # self.img = self.blink[0]
 
         # create the window
-        self.window.geometry('128x128+1800+1650')
+        self.window.geometry('128x128+0+0')
         # add the image to our label
         self.label.configure(image=self.img)
         # give window to geometry manager (so it will appear)
