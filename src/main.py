@@ -3,7 +3,7 @@ from PIL import Image, ImageTk
 import time
 import random # I can use this to make it randomly blink.
 import pynput
-from pynput.keyboard import Key, Listener
+from pynput import keyboard
 
 
 class tuber():
@@ -16,6 +16,10 @@ class tuber():
         self.window.bind('<KeyRelease>', self.on_release)
         self.window.bind("<ButtonPress-1>", self.start_move)
         self.window.bind('<B1-Motion>', self.move_window)
+
+        listener = keyboard.Listener(
+            on_press=self.on_press, on_release=self.on_release)
+        listener.start()
         # placeholder image
         # I could replace the gif blink mechanism with just switching between two images.
 
@@ -27,10 +31,10 @@ class tuber():
         blink = Image.open('assets/blink.png')
         talk_blink = Image.open('assets/talk_blink.png')
 
-        resized_idle = idle.resize((128,128))
-        resized_talk = talk.resize((128,128))
-        resized_blink = blink.resize((128,128))
-        resized_talk_blink = talk_blink.resize((128,128))
+        resized_idle = idle.resize((256,256))
+        resized_talk = talk.resize((256,256))
+        resized_blink = blink.resize((256,256))
+        resized_talk_blink = talk_blink.resize((256,256))
 
 
         self.idle = ImageTk.PhotoImage(resized_idle)
@@ -46,7 +50,7 @@ class tuber():
         self.timestamp = time.time()
 
         # set focushighlight to black when the window does not have focus
-        self.window.config(highlightbackground='green')
+        # self.window.config(highlightbackground='white')
 
         # make window frameless
         self.window.overrideredirect(True)
@@ -55,14 +59,17 @@ class tuber():
         self.window.attributes('-topmost', True)
 
         # turn black into transparency
-        self.window.wm_attributes('-transparentcolor', 'green')
+        self.window.wm_attributes('-transparentcolor', 'gray')
+        # self.window.wm_attributes('-transparentcolor', '#2a1863')
+
+        self.window.overrideredirect(True)
 
         # create a label as a container for our image
-        self.label = tk.Label(self.window, bd=0, bg='green')
+        self.label = tk.Label(self.window, bd=0, bg='gray')
 
-        # create a window of size 128x128 pixels, at coordinates 0,0
-        self.window.geometry('128x128+0+0')
-        # self.img = ImageTk.PhotoImage(self.img.resize(128, 128))
+        # create a window of size 256x256 pixels, at coordinates 0,0
+        self.window.geometry('256x256+0+0')
+        # self.img = ImageTk.PhotoImage(self.img.resize(256, 256))
 
         # add the image to our label
         self.label.configure(image=self.img)
@@ -111,14 +118,14 @@ class tuber():
         # self.img = self.blink[0]
 
         # create the window
-        self.window.geometry('128x128')
+        self.window.geometry('256x256')
         # add the image to our label
         self.label.configure(image=self.img)
         # give window to geometry manager (so it will appear)
         self.label.pack()
 
         # call update again after 10ms
-        self.window.after(100, self.update) #original value was 10
+        self.window.after(50, self.update) #original value was 10
 
 
     # keyboard events

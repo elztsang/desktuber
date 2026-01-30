@@ -1,2 +1,4 @@
 *.gif
 *.png
+.personal_notes
+src/myenv
