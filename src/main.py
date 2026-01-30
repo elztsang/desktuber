@@ -88,13 +88,11 @@ class tuber():
         # create a random interval for blinking
         newTime = random.randrange(3, 5)
 
-        # move right by one pixel
-        # self.x += 1
         # print("update called")
 
         # advance frame if 50ms have passed
         if time.time() > self.timestamp + newTime:
-            print("blink1 ", time.time())
+            # print("blink1 ", time.time())
             # self.timestamp = time.time()
             # advance the frame by one, wrap back to 0 at the end
             # self.frame_index = (self.frame_index + 1) % len(self.blink)
@@ -105,7 +103,7 @@ class tuber():
             else:
                 self.img = self.blink
         if time.time() > self.timestamp + newTime + 0.2: # might need to do some arithmetic/threshold stuff here to make the blink more "stable"
-            print("blink2 ", time.time())
+            # print("blink2 ", time.time())
             self.timestamp = time.time()
             # advance the frame by one, wrap back to 0 at the end
             # self.frame_index = (self.frame_index + 1) % len(self.blink)
