@@ -31,10 +31,10 @@ class tuber():
         blink = Image.open('assets/blink.png')
         talk_blink = Image.open('assets/talk_blink.png')
 
-        resized_idle = idle.resize((256,256))
-        resized_talk = talk.resize((256,256))
-        resized_blink = blink.resize((256,256))
-        resized_talk_blink = talk_blink.resize((256,256))
+        resized_idle = idle.resize((128,128))
+        resized_talk = talk.resize((128,128))
+        resized_blink = blink.resize((128,128))
+        resized_talk_blink = talk_blink.resize((128,128))
 
 
         self.idle = ImageTk.PhotoImage(resized_idle)
@@ -59,17 +59,17 @@ class tuber():
         self.window.attributes('-topmost', True)
 
         # turn black into transparency
-        self.window.wm_attributes('-transparentcolor', 'gray')
+        self.window.wm_attributes('-transparentcolor', '#212121')
         # self.window.wm_attributes('-transparentcolor', '#2a1863')
 
         self.window.overrideredirect(True)
 
         # create a label as a container for our image
-        self.label = tk.Label(self.window, bd=0, bg='gray')
+        self.label = tk.Label(self.window, bd=0, bg='#212121')
 
-        # create a window of size 256x256 pixels, at coordinates 0,0
-        self.window.geometry('256x256+0+0')
-        # self.img = ImageTk.PhotoImage(self.img.resize(256, 256))
+        # create a window of size 128x128 pixels, at coordinates 0,0
+        self.window.geometry('128x128+0+0')
+        # self.img = ImageTk.PhotoImage(self.img.resize(128, 128))
 
         # add the image to our label
         self.label.configure(image=self.img)
@@ -98,7 +98,7 @@ class tuber():
             # self.frame_index = (self.frame_index + 1) % len(self.blink)
             # self.img = self.blink[self.frame_index]
             if(self.isTalking == True):
-                print("============= talk blink =============")
+                # print("============= talk blink =============")
                 self.img = self.talk_blink
             else:
                 self.img = self.blink
@@ -116,7 +116,7 @@ class tuber():
         # self.img = self.blink[0]
 
         # create the window
-        self.window.geometry('256x256')
+        self.window.geometry('128x128')
         # add the image to our label
         self.label.configure(image=self.img)
         # give window to geometry manager (so it will appear)
